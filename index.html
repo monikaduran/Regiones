@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <title>Vega Lite Bar Chart</title>
+    <meta charset="utf-8">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@4.2.0/build/vega.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc6/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.19.2/build/vega-embed.js"></script>
+
+  <style media="screen">
+    /* Add space between Vega-Embed links  */
+    .vega-actions a {
+      margin-right: 15px;
+    }
+  </style>
+</head>
+<body> <center> <font size="2">
+  <h1>TIPO DE ABORTO MEDICO 2009 A 2017 EN COLOMBIA</h1>
+  <!-- Container for the visualization -->
+  <div id="vis"></div>
+
+  <script> 
+ 
+// Assign the specification to a local variable vlSpec.
+  var vlSpec = 
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+  "data": {"url": "datas.json"},
+  "mark": "bar",
+  "width": 500,
+  "height": 380,
+  "encoding": {
+    "x": {
+     // "timeUnit": "month",
+      "field": "year",
+      "type": "ordinal",
+      "axis": {"title": "AÑO"}
+    },
+    "y": {
+      "field":"amount",
+      "aggregate": "sum",
+      "type": "quantitative",
+      "axis": {"title": "CANTIDAD"}
+    },
+    "color": {
+      "field": "TIPO ABORTO",
+      "type": "nominal",
+      "scale":{"scheme":"tableau10"
+       },
+      "legend": {"title": "TIPO DE ABORTO"}
+    }
+  }
+}
+
+
+// Embed the visualization in the container with id `vis`
+  vegaEmbed("#vis", vlSpec,{theme: 'light', actions:false});
+ </script>
+</body>
+</html>
